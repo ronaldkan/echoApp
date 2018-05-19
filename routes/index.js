@@ -48,7 +48,7 @@ router.post('/content', function(req, res ,next) {
 router.post('/content', function(req, res, next) {
   var author = req.body.author;
   var address = req.body.address;
-  var detail = req.body.address;
+  var detail = req.body.detail;
   Content.saveContent(address, author, detail)
   .then(function() {
     Content.getContent(address)
