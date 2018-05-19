@@ -35,8 +35,8 @@ router.post('/login', function(req, res, next) {
   });
 });
 
-router.get('/content', function(req, res ,next) {
-  var address = req.query.address;
+router.post('/content', function(req, res ,next) {
+  var address = req.body.address;
   Content.getContent(address)
   .then(function (response) {
     return res.json({
