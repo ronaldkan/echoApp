@@ -13,15 +13,15 @@ var users = require('./routes/users');
 var app = express();
 
 // {force:true} to refresh
-sequelize.User().sync({force:true}).then(() => {
+sequelize.User().sync().then(() => {
   console.log("User db is created");
 });
 
-sequelize.Content().sync({force:true}).then(() => {
+sequelize.Content().sync().then(() => {
   console.log("Content db is created");
 });
 
-sequelize.Chat().sync({force:true}).then(() => {
+sequelize.Chat().sync().then(() => {
   console.log("Chat db is created");
 });
 
