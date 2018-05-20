@@ -1,12 +1,38 @@
 var express = require('express');
 var faker = require('faker');
+var moment = require('moment');
 var router = express.Router();
 var sequelize = require('../config/sequelizeUtil');
 var User = require('../models/user');
 var Content = require('../models/content');
+var io = require('../bin/www');
+var { RoomUsers } = require('../models/roomUsers');
+
+const generateMessage = (from, text) => {
+  return {
+    from, 
+    text, 
+    createdAt: moment().valueOf(new Date().getTime())
+  }
+};
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
+});
+
+router.post('/send', function(req, res, next) {
+  var socket = req.app.get('socketio');
+  console.log('hello socket');
+  var name = req.body.name;
+  var text = req.body.text;
+  var user = roomUsers.getUser(socket.id);
+  if (user) {
+    console.log('hello user');
+    io
+      .to(user.room)
+      .emit('newMessage', generateMessage(name, text));
+  }
 });
 
 router.get('/test', function(req, res, next) {

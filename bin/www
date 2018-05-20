@@ -37,7 +37,7 @@ const generateMessage = (from, text) => {
 
 io.on('connection', function (socket) {
   socket.on('join', (params, callback) => {
-
+    app.set('socketio', socket);
     socket.join(params.room);
     roomUsers.removeUser(socket.id);
     roomUsers.addUser(socket.id, params.name, params.room);
