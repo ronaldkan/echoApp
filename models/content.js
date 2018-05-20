@@ -17,5 +17,15 @@ module.exports = {
                 address: address
             }
         });
+    },
+    getAllContent: function(address) {
+        return Content.findAll();
+    }, 
+    getUserContent: function(author) {
+        return Content.findAll({
+            where: {
+                author: author
+            }
+        });
     }
 };

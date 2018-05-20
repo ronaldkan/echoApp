@@ -60,4 +60,22 @@ router.post('/content', function(req, res, next) {
   });
 });
 
+router.get('/content', function(req, res, next) {
+  var author = req.query.author;
+  if (author) {
+    Content.getUserContent(author)
+    .then(function (response) {
+      return res.json({
+        'content': response
+      });
+    });
+  }
+  Content.getAllContent()
+    .then(function(response) {
+      return res.json({
+        'content': response
+      });
+    });
+});
+
 module.exports = router;
