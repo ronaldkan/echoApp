@@ -27,6 +27,7 @@ router.post('/send', function(req, res, next) {
   console.log(socket.id);
   var name = req.body.name;
   var text = req.body.text;
+  console.log(roomUsers);
   var user = roomUsers.getUser(socket.id);
   console.log(user);
   if (user) {
