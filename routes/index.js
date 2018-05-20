@@ -24,6 +24,7 @@ router.get('/', function(req, res, next) {
 router.post('/send', function(req, res, next) {
   var socket = req.app.get('socketio');
   console.log('hello socket');
+  console.log(socket.id);
   var name = req.body.name;
   var text = req.body.text;
   var user = roomUsers.getUser(socket.id);
