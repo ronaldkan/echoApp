@@ -6,7 +6,6 @@ var sequelize = require('../config/sequelizeUtil');
 var User = require('../models/user');
 var Content = require('../models/content');
 var io = require('../bin/www');
-var { RoomUsers } = require('../models/roomUsers');
 
 const generateMessage = (from, text) => {
   return {
@@ -28,10 +27,8 @@ router.post('/send', function(req, res, next) {
   console.log(req.body);
   var name = req.body.name;
   var text = req.body.message;
-  console.log('helllllllll111111');
-  console.log(roomUsers);
-  console.log('hello1111111');
-  var user = roomUsers.getUser(socket.id);
+  var roomUsers1 = req.app.get('roomUsers');
+  var user = roomUsers1.getUser(socket.id);
   console.log(user);
   if (user) {
     console.log('hello user');

@@ -12,6 +12,7 @@ var moment = require('moment');
 
 var { RoomUsers } = require('../models/roomUsers');
 var roomUsers = new RoomUsers();
+app.set('roomUsers', roomUsers);
 /**
  * Get port from environment and store in Express.
  */
