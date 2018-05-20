@@ -22,6 +22,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/send', function(req, res, next) {
   var socket = req.app.get('socketio');
+  var io = req.app.get('io');
   console.log('hello socket');
   console.log(socket.id);
   console.log(req.body);
