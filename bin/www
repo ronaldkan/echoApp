@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('echoapp:server');
 var http = require('http');
 var socketIO = require('socket.io');
+var moment = require('moment');
 
 var { RoomUsers } = require('../models/roomUsers');
 var roomUsers = new RoomUsers();
@@ -24,6 +25,15 @@ app.set('port', port);
 
 var server = http.createServer(app);
 var io = socketIO(server);
+
+const generateMessage = (from, text) => {
+  return {
+    from, 
+    text, 
+    createdAt: moment().valueOf(new Date().getTime())
+  }
+};
+
 
 io.on('connection', function (socket) {
   socket.on('join', (params, callback) => {
@@ -51,7 +61,7 @@ io.on('connection', function (socket) {
 
   socket.on('createMessage', (message, callback) => {
     var user = roomUsers.getUser(socket.id);
-    if (user && isRealString(message.text)) {
+    if (user) {
       io
         .to(user.room)
         .emit('newMessage', generateMessage(user.name, message.text));
